@@ -2,6 +2,7 @@ FROM python:3.8
 
 # Copy in required files
 COPY requirements.txt ./
+COPY profiles.yml /etc/profiles
 
 # Install nano and Bash completion
 RUN apt-get update
@@ -30,4 +31,4 @@ RUN echo 'export -f dbt_run_changed' >> ~/.bashrc
 ## Add refresh command
 RUN echo 'alias dbt_refresh="dbt clean ; dbt deps ; dbt seed"' >> ~/.bashrc
 
-ENTRYPOINT bash
+ENTRYPOINT dbt
